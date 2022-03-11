@@ -1,7 +1,11 @@
 import React from 'react'
+import useHooks from '../hooks/useHooks'
 import a_banner from '../images/night_view.jpg'
 
 const About = () => {
+
+    useHooks();
+
     return (
         <div className="about_content">
             <div className="sec_01">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes, useParams } from 'react-router-dom'
+import { Route, Routes, useParams, Outlet } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import Gl3d from './Gl3d'
 import GlPs from './GlPs'
@@ -25,23 +25,23 @@ const Gallery = () => {
                         </li>
                     </ul>
                 </div>
-                <div className='subcontent'>
+                
+                {/* <div className='subcontent'> */}
                     <Routes>
                         <Route path={`:mininavId`} element={<Crouter/>}></Route>
                     </Routes>
-                </div>
+                    <Outlet/>
+                {/* </div> */}
             </div>
     );
 
     function Crouter() {
         let { mininavId } = useParams();
-        let Id = mininavId;
-        console.log("aa"+Id)
-        if (Id === "Photoshop")
+        if (mininavId === "Photoshop")
             return <GlPs/>;
-        else if ( Id === "3D")
+        else if ( mininavId === "3D")
             return <Gl3d/>;
-        else if ( Id === "Website")
+        else if ( mininavId === "Website")
             return <GlWeb/>;
     }
 }

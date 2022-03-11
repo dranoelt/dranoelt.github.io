@@ -11,8 +11,12 @@ const useHooks = () => {
     const [windowSize, setWindowSize] = useState({
         width: undefined,
         height: undefined,
-        doc: undefined
+        doc: undefined,
+        doc2: undefined,
+        height2: undefined
       });
+
+    
 
     useEffect(() => {
         function handleResize() {
@@ -23,7 +27,13 @@ const useHooks = () => {
                     document.body.scrollHeight, document.documentElement.scrollHeight,
                     document.body.offsetHeight, document.documentElement.offsetHeight,
                     document.body.clientHeight, document.documentElement.clientHeight
-                  )
+                  ),
+            doc2: Math.min(
+                    document.body.scrollHeight, document.documentElement.scrollHeight,
+                    document.body.offsetHeight, document.documentElement.offsetHeight,
+                    document.body.clientHeight, document.documentElement.clientHeight
+                  ) + 49,
+            height2: window.innerHeight + 49
           });
         }
         window.addEventListener("resize", handleResize);
@@ -32,12 +42,16 @@ const useHooks = () => {
       }, []); 
 
     const element = document.querySelector('.footer_warp');
-    if (windowSize.height>windowSize.doc) {
-        return element.classList.add('footer_btm');
+    console.log(windowSize.height," ", windowSize.height2, " ", windowSize.doc, " ", windowSize.doc2)
+    if (windowSize.height > windowSize.doc) {
+      return element.classList.add('footer_btm');
     }
-    if (windowSize.height<=windowSize.doc && document.querySelector('.footer_btm')) {
-        return element.classList.remove('footer_btm'); 
+    if (document.querySelector('.footer_btm') && windowSize.height <= windowSize.doc2) {
+      return element.classList.remove('footer_btm'); 
     }
+    
+    
+    
 }
 
 export default useHooks;
